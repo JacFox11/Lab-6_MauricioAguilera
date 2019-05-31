@@ -141,9 +141,7 @@ public class plataforma extends javax.swing.JFrame {
         tf_usuario = new javax.swing.JTextField();
         jButton2 = new javax.swing.JButton();
 
-        jd_menu.setMaximumSize(new java.awt.Dimension(680, 460));
         jd_menu.setMinimumSize(new java.awt.Dimension(680, 460));
-        jd_menu.setPreferredSize(new java.awt.Dimension(680, 460));
         jd_menu.setResizable(false);
         jd_menu.setSize(new java.awt.Dimension(680, 460));
         jd_menu.getContentPane().setLayout(null);
@@ -338,7 +336,8 @@ public class plataforma extends javax.swing.JFrame {
         jLabel13.setBounds(363, 110, 32, 14);
 
         cb_idiomapeli.setBackground(new java.awt.Color(51, 51, 51));
-        cb_idiomapeli.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Español", "Ingles", "Alemán y Francés" }));
+        cb_idiomapeli.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Español", "Ingles", "Alemán", "Francés" }));
+        cb_idiomapeli.setToolTipText("");
         jd_peli.getContentPane().add(cb_idiomapeli);
         cb_idiomapeli.setBounds(467, 107, 166, 20);
 
@@ -438,7 +437,7 @@ public class plataforma extends javax.swing.JFrame {
         jLabel18.setBounds(33, 149, 47, 14);
 
         cb_cateserie.setBackground(new java.awt.Color(51, 51, 51));
-        cb_cateserie.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Sitcom", "Drama", "Novelas", "Suspenso y YYY" }));
+        cb_cateserie.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Sitcom", "Drama", "Novelas", "Suspenso", "YYY" }));
         jd_serie.getContentPane().add(cb_cateserie);
         cb_cateserie.setBounds(158, 146, 166, 20);
 
@@ -472,7 +471,7 @@ public class plataforma extends javax.swing.JFrame {
         jLabel22.setBounds(363, 110, 32, 14);
 
         cb_idiomaserie.setBackground(new java.awt.Color(51, 51, 51));
-        cb_idiomaserie.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Español", "Ingles", "Alemán y Francés" }));
+        cb_idiomaserie.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Español", "Ingles", "Alemán", "Francés" }));
         jd_serie.getContentPane().add(cb_idiomaserie);
         cb_idiomaserie.setBounds(467, 107, 166, 20);
 
@@ -885,6 +884,8 @@ public class plataforma extends javax.swing.JFrame {
             as.getSeries().add(new Serie(nombre, tiempo, categoria, actores, temporada, productor, idioma, doblaje, subtitulos));
             as.escribirArchivo();
             bitacora+="Se agrego "+ nombre+" en " + new Date() + "por "+ tf_usuario.getText()+"\n";
+            jd_serie.setVisible(false);
+            jd_serie.setModal(false);
             tf_nombreserie.setText("");
             sp_tiemposerie.setValue(0);
             cb_cateserie.setSelectedIndex(0);
@@ -950,19 +951,17 @@ public class plataforma extends javax.swing.JFrame {
         // TODO add your handling code here:
         
         try {
-            archivo = new File ("./Bitacora");
+            archivo = new File ("./Bitacora.txt");
             FileWriter fw = new FileWriter(archivo, true);
             BufferedWriter bw = new BufferedWriter(fw);
             bw.write(bitacora);
             bitacora="";
             bw.flush();
-        } catch (IOException ex) {
-        }
-        try {
             bw.close();
             fw.close();
         } catch (IOException ex) {
         }
+        
         
     }//GEN-LAST:event_jMenuItem3ActionPerformed
 
@@ -1055,14 +1054,14 @@ public class plataforma extends javax.swing.JFrame {
                     nodo_seleccionado);
             bitacora+="Se elimino "+ ((Serie) nodo_seleccionado.getUserObject()).getNombre()+" en " + new Date() + "por "+ tf_usuario.getText()+"\n";
             m.reload();
-            ap.CargarArchivo();
-            p_selec = (Pelicula) nodo_seleccionado.getUserObject();
-            for (int i = 0; i < ap.getPeliculas().size(); i++) {
-                if (p_selec.getNombre() == ap.getPeliculas().get(i).getNombre() && p_selec.getActores() == ap.getPeliculas().get(i).getActores() && p_selec.getCategoria() == ap.getPeliculas().get(i).getCategoria()){
+            as.CargarArchivo();
+            s_selec = (Serie) nodo_seleccionado.getUserObject();
+            for (int i = 0; i < as.getSeries().size(); i++) {
+                if (s_selec.equals(as.getSeries().get(i))){
                     try {
-                        ap.CargarArchivo();
-                        ap.getPeliculas().remove(i);
-                        ap.escribirArchivo();
+                        as.CargarArchivo();
+                        as.getSeries().remove(i);
+                        as.escribirArchivo();
                     } catch (IOException ex) {
                     }
                 }
