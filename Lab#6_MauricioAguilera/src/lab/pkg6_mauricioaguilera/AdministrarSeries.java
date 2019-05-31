@@ -8,20 +8,20 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-public class AdministrarPeliculas {
-    ArrayList <Pelicula> peliculas = new ArrayList();
+public class AdministrarSeries {
+    ArrayList <Serie> series = new ArrayList();
     private File archivo=null;
 
-    public AdministrarPeliculas(String path) {
+    public AdministrarSeries(String path) {
         archivo = new File(path);
     }
 
-    public ArrayList<Pelicula> getPeliculas() {
-        return peliculas;
+    public ArrayList<Serie> getSeries() {
+        return series;
     }
 
-    public void setPeliculas(ArrayList<Pelicula> peliculas) {
-        this.peliculas = peliculas;
+    public void setSeries(ArrayList<Serie> series) {
+        this.series = series;
     }
 
     public File getArchivo() {
@@ -34,11 +34,11 @@ public class AdministrarPeliculas {
 
     @Override
     public String toString() {
-        return "peliculas=" + peliculas;
+        return "series=" + series;
     }
     
-    public void SetPelicula (Pelicula P){
-        this.peliculas.add(P);
+    public void SetSerie (Serie s){
+        this.series.add(s);
     }
     
     public void escribirArchivo() throws IOException {
@@ -47,13 +47,13 @@ public class AdministrarPeliculas {
         try {
             fw = new FileWriter(archivo, false);
             bw = new BufferedWriter(fw);
-            for (Pelicula t : peliculas) {
+            for (Serie t : series) {
                 bw.write(t.getNombre()+";");
                 bw.write(t.getTiempo()+";");
                 bw.write(t.getCategoria()+";");
                 bw.write(t.getActores()+";");
-                bw.write(t.getDirector()+";");
-                bw.write(t.getCompania()+";");
+                bw.write(t.getTemporadas()+";");
+                bw.write(t.getProductor()+";");
                 bw.write(t.getIdioma()+";");
                 bw.write(t.getDoblaje()+";");
                 bw.write(t.getSubtitulos()+";");
@@ -68,17 +68,17 @@ public class AdministrarPeliculas {
     
     public void CargarArchivo() {
         Scanner sc= null;
-        peliculas = new ArrayList();
+        series = new ArrayList();
         if (archivo.exists()){
             try {
                 sc = new Scanner(archivo);
                 sc.useDelimiter(";");
                 while (sc.hasNext()){
-                    peliculas.add(new Pelicula(sc.next(), 
+                    series.add(new Serie(sc.next(), 
                             sc.nextInt(), 
                             sc.next(),
                             sc.next(),
-                            sc.next(),
+                            sc.nextInt(),
                             sc.next(),
                             sc.next(),
                             sc.next(),

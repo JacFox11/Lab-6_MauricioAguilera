@@ -5,7 +5,13 @@
  */
 package lab.pkg6_mauricioaguilera;
 
-import java.util.ArrayList;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.util.Date;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
 /**
@@ -13,7 +19,12 @@ import javax.swing.JOptionPane;
  * @author mauri
  */
 public class plataforma extends javax.swing.JFrame {
-
+    AdministrarUsuarios au = new AdministrarUsuarios("./Usuarios.txt");
+    AdministrarPeliculas ap = new AdministrarPeliculas("./Peliculas.txt");
+    AdministrarSeries as = new AdministrarSeries("./Series.txt");
+    File archivo=null;
+    FileWriter fr=null;
+    BufferedWriter bw=null;
     /**
      * Creates new form plataforma
      */
@@ -37,6 +48,7 @@ public class plataforma extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         jt_peli = new javax.swing.JTree();
         jLabel6 = new javax.swing.JLabel();
+        jButton5 = new javax.swing.JButton();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         jMenuItem1 = new javax.swing.JMenuItem();
@@ -71,6 +83,30 @@ public class plataforma extends javax.swing.JFrame {
         jButton3 = new javax.swing.JButton();
         buttonGroup1 = new javax.swing.ButtonGroup();
         buttonGroup2 = new javax.swing.ButtonGroup();
+        jd_serie = new javax.swing.JDialog();
+        jLabel16 = new javax.swing.JLabel();
+        tf_nombreserie = new javax.swing.JTextField();
+        jLabel17 = new javax.swing.JLabel();
+        sp_tiemposerie = new javax.swing.JSpinner();
+        jLabel18 = new javax.swing.JLabel();
+        cb_cateserie = new javax.swing.JComboBox<>();
+        jLabel19 = new javax.swing.JLabel();
+        jScrollPane5 = new javax.swing.JScrollPane();
+        ta_actorserie = new javax.swing.JTextArea();
+        tf_productor = new javax.swing.JTextField();
+        jLabel21 = new javax.swing.JLabel();
+        jLabel22 = new javax.swing.JLabel();
+        cb_idiomaserie = new javax.swing.JComboBox<>();
+        jLabel23 = new javax.swing.JLabel();
+        rb_siserie = new javax.swing.JRadioButton();
+        rb_noserie = new javax.swing.JRadioButton();
+        jLabel24 = new javax.swing.JLabel();
+        rb_siserie1 = new javax.swing.JRadioButton();
+        rb_noserie1 = new javax.swing.JRadioButton();
+        jPanel4 = new javax.swing.JPanel();
+        jButton4 = new javax.swing.JButton();
+        jLabel26 = new javax.swing.JLabel();
+        sp_temporada = new javax.swing.JSpinner();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
@@ -96,7 +132,7 @@ public class plataforma extends javax.swing.JFrame {
         jScrollPane3.setViewportView(ta_datos);
 
         jd_menu.getContentPane().add(jScrollPane3);
-        jScrollPane3.setBounds(349, 83, 300, 322);
+        jScrollPane3.setBounds(349, 83, 300, 270);
 
         jPanel2.setBackground(new java.awt.Color(0, 0, 0));
 
@@ -107,9 +143,18 @@ public class plataforma extends javax.swing.JFrame {
         jScrollPane1.setViewportView(jt_peli);
 
         jLabel6.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
-        jLabel6.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel6.setForeground(new java.awt.Color(204, 0, 0));
         jLabel6.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel6.setText("Bienvenido");
+
+        jButton5.setBackground(new java.awt.Color(255, 255, 255));
+        jButton5.setForeground(new java.awt.Color(204, 0, 0));
+        jButton5.setText("Cargar Arbol");
+        jButton5.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jButton5MouseClicked(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -118,11 +163,13 @@ public class plataforma extends javax.swing.JFrame {
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGap(33, 33, 33)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGap(195, 195, 195)
-                        .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 263, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 263, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGap(33, 33, 33)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jScrollPane1)
+                            .addComponent(jButton5, javax.swing.GroupLayout.DEFAULT_SIZE, 250, Short.MAX_VALUE))))
                 .addContainerGap(252, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
@@ -131,8 +178,10 @@ public class plataforma extends javax.swing.JFrame {
                 .addContainerGap(42, Short.MAX_VALUE)
                 .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(39, 39, 39)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(75, 75, 75))
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 272, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(77, 77, 77))
         );
 
         jd_menu.getContentPane().add(jPanel2);
@@ -157,9 +206,19 @@ public class plataforma extends javax.swing.JFrame {
         jMenu1.add(jMenuItem1);
 
         jMenuItem2.setText("Agregar Serie");
+        jMenuItem2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem2ActionPerformed(evt);
+            }
+        });
         jMenu1.add(jMenuItem2);
 
-        jMenuItem3.setText("Guardar Cambios");
+        jMenuItem3.setText("Guardar Cambios a bitacora");
+        jMenuItem3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem3ActionPerformed(evt);
+            }
+        });
         jMenu1.add(jMenuItem3);
 
         jMenuItem4.setText("Log Out");
@@ -179,7 +238,6 @@ public class plataforma extends javax.swing.JFrame {
         jScrollPane2.setViewportView(jTextArea1);
 
         jd_peli.setTitle("Agregar Pelicula");
-        jd_peli.setLocationByPlatform(true);
         jd_peli.setMaximumSize(new java.awt.Dimension(680, 460));
         jd_peli.setMinimumSize(new java.awt.Dimension(680, 460));
         jd_peli.setPreferredSize(new java.awt.Dimension(680, 460));
@@ -327,6 +385,156 @@ public class plataforma extends javax.swing.JFrame {
         jd_peli.getContentPane().add(jPanel3);
         jPanel3.setBounds(-20, -10, 720, 490);
 
+        jd_serie.setPreferredSize(new java.awt.Dimension(680, 460));
+        jd_serie.setSize(new java.awt.Dimension(680, 460));
+        jd_serie.getContentPane().setLayout(null);
+
+        jLabel16.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel16.setText("Nombre");
+        jd_serie.getContentPane().add(jLabel16);
+        jLabel16.setBounds(33, 72, 37, 14);
+
+        tf_nombreserie.setBackground(new java.awt.Color(51, 51, 51));
+        tf_nombreserie.setForeground(new java.awt.Color(255, 255, 255));
+        jd_serie.getContentPane().add(tf_nombreserie);
+        tf_nombreserie.setBounds(158, 69, 166, 20);
+
+        jLabel17.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel17.setText("Duracion por capitulo (Minutos)");
+        jd_serie.getContentPane().add(jLabel17);
+        jLabel17.setBounds(33, 110, 150, 14);
+        jd_serie.getContentPane().add(sp_tiemposerie);
+        sp_tiemposerie.setBounds(265, 107, 59, 20);
+
+        jLabel18.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel18.setText("Categoria");
+        jd_serie.getContentPane().add(jLabel18);
+        jLabel18.setBounds(33, 149, 47, 14);
+
+        cb_cateserie.setBackground(new java.awt.Color(51, 51, 51));
+        cb_cateserie.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Suspenso", "Terror", "Acción", "Románticas", "Ciencia Ficción", "Animación", "Fantasía" }));
+        jd_serie.getContentPane().add(cb_cateserie);
+        cb_cateserie.setBounds(158, 146, 166, 20);
+
+        jLabel19.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel19.setText("Actores");
+        jd_serie.getContentPane().add(jLabel19);
+        jLabel19.setBounds(33, 183, 37, 14);
+
+        ta_actorserie.setBackground(new java.awt.Color(51, 51, 51));
+        ta_actorserie.setColumns(20);
+        ta_actorserie.setForeground(new java.awt.Color(255, 255, 255));
+        ta_actorserie.setRows(5);
+        jScrollPane5.setViewportView(ta_actorserie);
+
+        jd_serie.getContentPane().add(jScrollPane5);
+        jScrollPane5.setBounds(158, 183, 166, 96);
+
+        tf_productor.setBackground(new java.awt.Color(51, 51, 51));
+        tf_productor.setForeground(new java.awt.Color(255, 255, 255));
+        jd_serie.getContentPane().add(tf_productor);
+        tf_productor.setBounds(467, 69, 166, 20);
+
+        jLabel21.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel21.setText("Productora");
+        jd_serie.getContentPane().add(jLabel21);
+        jLabel21.setBounds(363, 72, 60, 14);
+
+        jLabel22.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel22.setText("Idioma");
+        jd_serie.getContentPane().add(jLabel22);
+        jLabel22.setBounds(363, 110, 32, 14);
+
+        cb_idiomaserie.setBackground(new java.awt.Color(51, 51, 51));
+        cb_idiomaserie.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Español", "Ingles", "Alemán y Francés" }));
+        jd_serie.getContentPane().add(cb_idiomaserie);
+        cb_idiomaserie.setBounds(467, 107, 166, 20);
+
+        jLabel23.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel23.setText("Doblaje");
+        jd_serie.getContentPane().add(jLabel23);
+        jLabel23.setBounds(363, 149, 36, 14);
+
+        rb_siserie.setBackground(new java.awt.Color(0, 0, 0));
+        buttonGroup1.add(rb_siserie);
+        rb_siserie.setForeground(new java.awt.Color(255, 255, 255));
+        rb_siserie.setText("Si");
+        jd_serie.getContentPane().add(rb_siserie);
+        rb_siserie.setBounds(509, 145, 33, 23);
+
+        rb_noserie.setBackground(new java.awt.Color(0, 0, 0));
+        buttonGroup1.add(rb_noserie);
+        rb_noserie.setForeground(new java.awt.Color(255, 255, 255));
+        rb_noserie.setText("No");
+        jd_serie.getContentPane().add(rb_noserie);
+        rb_noserie.setBounds(572, 145, 39, 23);
+
+        jLabel24.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel24.setText("Subtitulos");
+        jd_serie.getContentPane().add(jLabel24);
+        jLabel24.setBounds(363, 187, 47, 14);
+
+        rb_siserie1.setBackground(new java.awt.Color(0, 0, 0));
+        buttonGroup2.add(rb_siserie1);
+        rb_siserie1.setForeground(new java.awt.Color(255, 255, 255));
+        rb_siserie1.setText("Si");
+        jd_serie.getContentPane().add(rb_siserie1);
+        rb_siserie1.setBounds(509, 183, 33, 23);
+
+        rb_noserie1.setBackground(new java.awt.Color(0, 0, 0));
+        buttonGroup2.add(rb_noserie1);
+        rb_noserie1.setForeground(new java.awt.Color(255, 255, 255));
+        rb_noserie1.setText("No");
+        jd_serie.getContentPane().add(rb_noserie1);
+        rb_noserie1.setBounds(572, 183, 39, 23);
+
+        jPanel4.setBackground(new java.awt.Color(0, 0, 0));
+
+        jButton4.setBackground(new java.awt.Color(255, 255, 255));
+        jButton4.setForeground(new java.awt.Color(204, 0, 0));
+        jButton4.setText("Guardar");
+        jButton4.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jButton4MouseClicked(evt);
+            }
+        });
+
+        jLabel26.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel26.setText("Cantidad de Temporadas");
+
+        javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
+        jPanel4.setLayout(jPanel4Layout);
+        jPanel4Layout.setHorizontalGroup(
+            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel4Layout.createSequentialGroup()
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel4Layout.createSequentialGroup()
+                        .addGap(200, 200, 200)
+                        .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 318, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel4Layout.createSequentialGroup()
+                        .addGap(50, 50, 50)
+                        .addComponent(jLabel26, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(82, 82, 82)
+                        .addComponent(sp_temporada, javax.swing.GroupLayout.PREFERRED_SIZE, 59, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(202, Short.MAX_VALUE))
+        );
+        jPanel4Layout.setVerticalGroup(
+            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
+                .addContainerGap(320, Short.MAX_VALUE)
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel4Layout.createSequentialGroup()
+                        .addGap(3, 3, 3)
+                        .addComponent(jLabel26))
+                    .addComponent(sp_temporada, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(53, 53, 53)
+                .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(60, 60, 60))
+        );
+
+        jd_serie.getContentPane().add(jPanel4);
+        jPanel4.setBounds(-20, -10, 720, 490);
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(0, 0, 0));
         setForeground(new java.awt.Color(0, 0, 0));
@@ -438,17 +646,14 @@ public class plataforma extends javax.swing.JFrame {
 
     private void jButton1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MouseClicked
         // TODO add your handling code here:
-        AdministarUsuarios au = new AdministarUsuarios("./Usuarios.txt");
-        usuarios = au.CargarArchivo();
+        au.CargarArchivo();
         boolean val=false;
-        for (int i = 0; i < usuarios.size(); i++) {
-            if (tf_usuario.getText().equals(usuarios.get(i).getNombre()) && pf_pass.getText().equals(usuarios.get(i).getPass())){
+        for (int i = 0; i < au.getUsuarios().size(); i++) {
+            if (tf_usuario.getText().equals(au.getUsuarios().get(i).getNombre()) && pf_pass.getText().equals(au.getUsuarios().get(i).getPass())){
                 val=true;
             }
         }
         if (val){
-            tf_usuario.setText("");
-            pf_pass.setText("");
             jd_menu.setModal(true);
             jd_menu.pack();
             jd_menu.setLocationRelativeTo(this);
@@ -461,11 +666,10 @@ public class plataforma extends javax.swing.JFrame {
 
     private void jButton2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton2MouseClicked
         // TODO add your handling code here:
-        AdministarUsuarios au = new AdministarUsuarios("./Usuarios.txt");
-        usuarios = au.CargarArchivo();
+        au.CargarArchivo();
         String temp="";
-        for (int i = 0; i < usuarios.size(); i++) {
-            temp+=usuarios.get(i)+"\n";
+        for (int i = 0; i < au.getUsuarios().size(); i++) {
+            temp+=au.getUsuarios().get(i)+"\n";
         }
         JOptionPane.showMessageDialog(this, temp);
     }//GEN-LAST:event_jButton2MouseClicked
@@ -476,6 +680,8 @@ public class plataforma extends javax.swing.JFrame {
 
     private void jMenuItem4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem4ActionPerformed
         // TODO add your handling code here:
+        tf_usuario.setText("");
+        pf_pass.setText("");
         jd_menu.setVisible(false);
         jd_menu.setModal(false);
     }//GEN-LAST:event_jMenuItem4ActionPerformed
@@ -518,11 +724,85 @@ public class plataforma extends javax.swing.JFrame {
             } else {
                 subtitulos="no";
             }
-            
-            
+            ap.CargarArchivo();
+            ap.getPeliculas().add(new Pelicula(nombre, tiempo, categoria, actores, director, compania, idioma, doblaje, subtitulos));
+            ap.escribirArchivo();
+            bitacora+="Se agrego "+ nombre+" en " + new Date() + "por "+ tf_usuario.getText()+"\n";
+            jd_peli.setVisible(false);
+            jd_peli.setModal(false);
         } catch (Exception e) {
         }
     }//GEN-LAST:event_jButton3MouseClicked
+
+    private void jButton4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton4MouseClicked
+        // TODO add your handling code here:
+        String nombre;
+        int tiempo;
+        String categoria;
+        String actores;
+        int temporada;
+        String productor;
+        String idioma;
+        String doblaje="";
+        String subtitulos="";
+        try {
+            nombre= tf_nombreserie.getText();
+            tiempo= (Integer)sp_tiemposerie.getValue();
+            categoria = cb_cateserie.getSelectedItem().toString();
+            actores = ta_actorserie.getText();
+            temporada = (int) sp_temporada.getValue();
+            productor = tf_productor.getText();
+            idioma = cb_idiomaserie.getSelectedItem().toString();
+            if (rb_siserie.isSelected()){
+                doblaje = "si";
+            }
+            else{
+                doblaje = "no";
+            }
+            if (rb_siserie1.isSelected()) {
+                subtitulos="si";
+            } else {
+                subtitulos="no";
+            }
+            as.CargarArchivo();
+            as.getSeries().add(new Serie(nombre, tiempo, categoria, actores, temporada, productor, idioma, doblaje, subtitulos));
+            as.escribirArchivo();
+            bitacora+="Se agrego "+ nombre+" en " + new Date() + "por "+ tf_usuario.getText()+"\n";
+            
+        } catch (Exception e) {
+        }
+    }//GEN-LAST:event_jButton4MouseClicked
+
+    private void jButton5MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton5MouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton5MouseClicked
+
+    private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
+        // TODO add your handling code here:
+        jd_serie.setModal(true);
+        jd_serie.pack();
+        jd_serie.setLocationRelativeTo(this);
+        jd_serie.setVisible(true);
+    }//GEN-LAST:event_jMenuItem2ActionPerformed
+
+    private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
+        // TODO add your handling code here:
+        
+        try {
+            archivo = new File ("./Bitacora");
+            FileWriter fw = new FileWriter(archivo, true);
+            BufferedWriter bw = new BufferedWriter(fw);
+            bw.write(bitacora);
+            bw.flush();
+        } catch (IOException ex) {
+        }
+        try {
+            bw.close();
+            fw.close();
+        } catch (IOException ex) {
+        }
+        
+    }//GEN-LAST:event_jMenuItem3ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -563,10 +843,14 @@ public class plataforma extends javax.swing.JFrame {
     private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.ButtonGroup buttonGroup2;
     private javax.swing.JComboBox<String> cb_catepeli;
+    private javax.swing.JComboBox<String> cb_cateserie;
     private javax.swing.JComboBox<String> cb_idiomapeli;
+    private javax.swing.JComboBox<String> cb_idiomaserie;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
+    private javax.swing.JButton jButton4;
+    private javax.swing.JButton jButton5;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -574,7 +858,16 @@ public class plataforma extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel15;
+    private javax.swing.JLabel jLabel16;
+    private javax.swing.JLabel jLabel17;
+    private javax.swing.JLabel jLabel18;
+    private javax.swing.JLabel jLabel19;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel21;
+    private javax.swing.JLabel jLabel22;
+    private javax.swing.JLabel jLabel23;
+    private javax.swing.JLabel jLabel24;
+    private javax.swing.JLabel jLabel26;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
@@ -591,28 +884,39 @@ public class plataforma extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
+    private javax.swing.JPanel jPanel4;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane4;
+    private javax.swing.JScrollPane jScrollPane5;
     private javax.swing.JTextArea jTextArea1;
     private javax.swing.JDialog jd_menu;
     private javax.swing.JDialog jd_peli;
+    private javax.swing.JDialog jd_serie;
     private javax.swing.JTree jt_peli;
     private javax.swing.JPasswordField pf_pass;
     private javax.swing.JRadioButton rb_nopeli;
     private javax.swing.JRadioButton rb_nopeli1;
+    private javax.swing.JRadioButton rb_noserie;
+    private javax.swing.JRadioButton rb_noserie1;
     private javax.swing.JRadioButton rb_sipeli;
     private javax.swing.JRadioButton rb_sipeli1;
+    private javax.swing.JRadioButton rb_siserie;
+    private javax.swing.JRadioButton rb_siserie1;
+    private javax.swing.JSpinner sp_temporada;
     private javax.swing.JSpinner sp_tiempopeli;
+    private javax.swing.JSpinner sp_tiemposerie;
     private javax.swing.JTextArea ta_actorpeli;
+    private javax.swing.JTextArea ta_actorserie;
     private javax.swing.JTextArea ta_datos;
     private javax.swing.JTextField tf_compania;
     private javax.swing.JTextField tf_director;
     private javax.swing.JTextField tf_nombrepeli;
+    private javax.swing.JTextField tf_nombreserie;
+    private javax.swing.JTextField tf_productor;
     private javax.swing.JTextField tf_usuario;
     // End of variables declaration//GEN-END:variables
-ArrayList <Usuario> usuarios = new ArrayList();
-ArrayList <Pelicula> peliculas = new ArrayList();
-ArrayList <Serie> series = new ArrayList();
+
+String bitacora="";
 }

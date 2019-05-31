@@ -4,11 +4,11 @@ package lab.pkg6_mauricioaguilera;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.Scanner;
-public class AdministarUsuarios {
+public class AdministrarUsuarios {
     ArrayList <Usuario> usuarios = new ArrayList();
     private File archivo=null;
 
-    public AdministarUsuarios(String path) {
+    public AdministrarUsuarios(String path) {
         archivo = new File(path);
     }
 
@@ -33,7 +33,7 @@ public class AdministarUsuarios {
         return "usuarios=" + usuarios;
     }
     
-    public ArrayList<Usuario> CargarArchivo() {
+    public void CargarArchivo() {
         Scanner sc= null;
         usuarios = new ArrayList();
         if (archivo.exists()){
@@ -50,6 +50,5 @@ public class AdministarUsuarios {
             }
             sc.close();
         }
-        return usuarios;
     }
 }
