@@ -110,6 +110,26 @@ public class plataforma extends javax.swing.JFrame {
         jButton4 = new javax.swing.JButton();
         jLabel26 = new javax.swing.JLabel();
         sp_temporada = new javax.swing.JSpinner();
+        popup_peli = new javax.swing.JPopupMenu();
+        mod_peli = new javax.swing.JMenu();
+        mod_peli_nombre = new javax.swing.JMenuItem();
+        mod_peli_duracion = new javax.swing.JMenuItem();
+        mod_peli_cate = new javax.swing.JMenuItem();
+        mod_peli_director = new javax.swing.JMenuItem();
+        mod_peli_compania = new javax.swing.JMenuItem();
+        mod_peli_doblaje = new javax.swing.JMenuItem();
+        mod_peli_subtitulos = new javax.swing.JMenuItem();
+        peli_eliminar = new javax.swing.JMenuItem();
+        popup_serie = new javax.swing.JPopupMenu();
+        mod_serie = new javax.swing.JMenu();
+        mod_serie_nombre = new javax.swing.JMenuItem();
+        mod_serie_duracion = new javax.swing.JMenuItem();
+        mod_serie_cate = new javax.swing.JMenuItem();
+        mod_serie_temporada = new javax.swing.JMenuItem();
+        mod_serie_productor = new javax.swing.JMenuItem();
+        mod_serie_doblaje = new javax.swing.JMenuItem();
+        mod_serie_subtitulos = new javax.swing.JMenuItem();
+        serie_eliminar = new javax.swing.JMenuItem();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
@@ -541,6 +561,74 @@ public class plataforma extends javax.swing.JFrame {
         jd_serie.getContentPane().add(jPanel4);
         jPanel4.setBounds(-20, -10, 720, 490);
 
+        mod_peli.setText("Modificar");
+
+        mod_peli_nombre.setText("Nombre");
+        mod_peli.add(mod_peli_nombre);
+
+        mod_peli_duracion.setText("Duracion");
+        mod_peli_duracion.setToolTipText("");
+        mod_peli.add(mod_peli_duracion);
+
+        mod_peli_cate.setText("Categoria");
+        mod_peli_cate.setToolTipText("");
+        mod_peli.add(mod_peli_cate);
+
+        mod_peli_director.setText("Director");
+        mod_peli.add(mod_peli_director);
+
+        mod_peli_compania.setText("Compania");
+        mod_peli.add(mod_peli_compania);
+
+        mod_peli_doblaje.setText("Doblaje");
+        mod_peli.add(mod_peli_doblaje);
+
+        mod_peli_subtitulos.setText("Subtitulos");
+        mod_peli.add(mod_peli_subtitulos);
+
+        popup_peli.add(mod_peli);
+
+        peli_eliminar.setText("Eliminar");
+        peli_eliminar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                peli_eliminarActionPerformed(evt);
+            }
+        });
+        popup_peli.add(peli_eliminar);
+
+        mod_serie.setText("Modificar");
+
+        mod_serie_nombre.setText("Nombre");
+        mod_serie.add(mod_serie_nombre);
+
+        mod_serie_duracion.setText("Duracion");
+        mod_serie.add(mod_serie_duracion);
+
+        mod_serie_cate.setText("Categoria");
+        mod_serie.add(mod_serie_cate);
+
+        mod_serie_temporada.setText("Temporada");
+        mod_serie.add(mod_serie_temporada);
+
+        mod_serie_productor.setText("Productor");
+        mod_serie.add(mod_serie_productor);
+
+        mod_serie_doblaje.setText("Doblaje");
+        mod_serie.add(mod_serie_doblaje);
+
+        mod_serie_subtitulos.setText("Subtitulos");
+        mod_serie.add(mod_serie_subtitulos);
+
+        popup_serie.add(mod_serie);
+
+        serie_eliminar.setText("Eliminar");
+        serie_eliminar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                serie_eliminarActionPerformed(evt);
+            }
+        });
+        popup_serie.add(serie_eliminar);
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(0, 0, 0));
         setForeground(new java.awt.Color(0, 0, 0));
@@ -906,13 +994,81 @@ public class plataforma extends javax.swing.JFrame {
                     "Categoria= "+s_selec.getCategoria()+"\n"+
                     "Actores= "+s_selec.getActores()+"\n"+
                     "Numero de Temporadas= "+s_selec.getTemporadas()+"\n"+
-                    "Productora= "+s_selec.getProductor()+"\n"+
+                    "Casa Productora= "+s_selec.getProductor()+"\n"+
                     "Idioma= "+s_selec.getIdioma()+"\n"+
                     "Doblaje= "+s_selec.getDoblaje()+"\n"+
                     "Subtitulado a espanol= "+s_selec.getSubtitulos();
             ta_datos.setText(temp);
         }
+        if (evt.isMetaDown()){
+            if (nodo_seleccionado.getUserObject() instanceof Pelicula){
+                popup_peli.show(evt.getComponent(), evt.getX(), evt.getY());
+            }
+            if (nodo_seleccionado.getUserObject() instanceof Serie){
+                popup_serie.show(evt.getComponent(), evt.getX(), evt.getY());
+            }
+        }
     }//GEN-LAST:event_jt_peliMouseClicked
+
+    private void peli_eliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_peli_eliminarActionPerformed
+        // TODO add your handling code here:
+        int response = JOptionPane.showConfirmDialog(jd_menu,
+                "Seguro que desea eliminar esta pelicula?",
+                "Confirm",
+                JOptionPane.YES_NO_OPTION,
+                JOptionPane.QUESTION_MESSAGE);
+
+        if (response == JOptionPane.OK_OPTION) {
+            DefaultTreeModel m
+                    = (DefaultTreeModel) jt_peli.getModel();
+            m.removeNodeFromParent(
+                    nodo_seleccionado);
+            bitacora+="Se elimino "+ ((Pelicula) nodo_seleccionado.getUserObject()).getNombre()+" en " + new Date() + "por "+ tf_usuario.getText()+"\n";
+            m.reload();
+            ap.CargarArchivo();
+            p_selec = (Pelicula) nodo_seleccionado.getUserObject();
+            for (int i = 0; i < ap.getPeliculas().size(); i++) {
+                if (p_selec.getNombre() == ap.getPeliculas().get(i).getNombre() && p_selec.getActores() == ap.getPeliculas().get(i).getActores() && p_selec.getCategoria() == ap.getPeliculas().get(i).getCategoria()){
+                    try {
+                        ap.CargarArchivo();
+                        ap.getPeliculas().remove(i);
+                        ap.escribirArchivo();
+                    } catch (IOException ex) {
+                    }
+                }
+            }
+        }
+    }//GEN-LAST:event_peli_eliminarActionPerformed
+
+    private void serie_eliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_serie_eliminarActionPerformed
+        // TODO add your handling code here:
+        int response = JOptionPane.showConfirmDialog(jd_menu,
+                "Seguro que desea eliminar esta serie?",
+                "Confirm",
+                JOptionPane.YES_NO_OPTION,
+                JOptionPane.QUESTION_MESSAGE);
+
+        if (response == JOptionPane.OK_OPTION) {
+            DefaultTreeModel m
+                    = (DefaultTreeModel) jt_peli.getModel();
+            m.removeNodeFromParent(
+                    nodo_seleccionado);
+            bitacora+="Se elimino "+ ((Serie) nodo_seleccionado.getUserObject()).getNombre()+" en " + new Date() + "por "+ tf_usuario.getText()+"\n";
+            m.reload();
+            ap.CargarArchivo();
+            p_selec = (Pelicula) nodo_seleccionado.getUserObject();
+            for (int i = 0; i < ap.getPeliculas().size(); i++) {
+                if (p_selec.getNombre() == ap.getPeliculas().get(i).getNombre() && p_selec.getActores() == ap.getPeliculas().get(i).getActores() && p_selec.getCategoria() == ap.getPeliculas().get(i).getCategoria()){
+                    try {
+                        ap.CargarArchivo();
+                        ap.getPeliculas().remove(i);
+                        ap.escribirArchivo();
+                    } catch (IOException ex) {
+                    }
+                }
+            }
+        }
+    }//GEN-LAST:event_serie_eliminarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -1005,7 +1161,26 @@ public class plataforma extends javax.swing.JFrame {
     private javax.swing.JDialog jd_peli;
     private javax.swing.JDialog jd_serie;
     private javax.swing.JTree jt_peli;
+    private javax.swing.JMenu mod_peli;
+    private javax.swing.JMenuItem mod_peli_cate;
+    private javax.swing.JMenuItem mod_peli_compania;
+    private javax.swing.JMenuItem mod_peli_director;
+    private javax.swing.JMenuItem mod_peli_doblaje;
+    private javax.swing.JMenuItem mod_peli_duracion;
+    private javax.swing.JMenuItem mod_peli_nombre;
+    private javax.swing.JMenuItem mod_peli_subtitulos;
+    private javax.swing.JMenu mod_serie;
+    private javax.swing.JMenuItem mod_serie_cate;
+    private javax.swing.JMenuItem mod_serie_doblaje;
+    private javax.swing.JMenuItem mod_serie_duracion;
+    private javax.swing.JMenuItem mod_serie_nombre;
+    private javax.swing.JMenuItem mod_serie_productor;
+    private javax.swing.JMenuItem mod_serie_subtitulos;
+    private javax.swing.JMenuItem mod_serie_temporada;
+    private javax.swing.JMenuItem peli_eliminar;
     private javax.swing.JPasswordField pf_pass;
+    private javax.swing.JPopupMenu popup_peli;
+    private javax.swing.JPopupMenu popup_serie;
     private javax.swing.JRadioButton rb_nopeli;
     private javax.swing.JRadioButton rb_nopeli1;
     private javax.swing.JRadioButton rb_noserie;
@@ -1014,6 +1189,7 @@ public class plataforma extends javax.swing.JFrame {
     private javax.swing.JRadioButton rb_sipeli1;
     private javax.swing.JRadioButton rb_siserie;
     private javax.swing.JRadioButton rb_siserie1;
+    private javax.swing.JMenuItem serie_eliminar;
     private javax.swing.JSpinner sp_temporada;
     private javax.swing.JSpinner sp_tiempopeli;
     private javax.swing.JSpinner sp_tiemposerie;
