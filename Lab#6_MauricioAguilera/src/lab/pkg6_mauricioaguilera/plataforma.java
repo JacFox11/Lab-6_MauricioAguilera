@@ -12,7 +12,10 @@ import java.io.IOException;
 import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.DefaultListModel;
 import javax.swing.JOptionPane;
+import javax.swing.tree.DefaultMutableTreeNode;
+import javax.swing.tree.DefaultTreeModel;
 
 /**
  *
@@ -23,7 +26,7 @@ public class plataforma extends javax.swing.JFrame {
     AdministrarPeliculas ap = new AdministrarPeliculas("./Peliculas.txt");
     AdministrarSeries as = new AdministrarSeries("./Series.txt");
     File archivo=null;
-    FileWriter fr=null;
+    FileWriter fw=null;
     BufferedWriter bw=null;
     /**
      * Creates new form plataforma
@@ -140,6 +143,11 @@ public class plataforma extends javax.swing.JFrame {
         jt_peli.setForeground(new java.awt.Color(255, 255, 255));
         javax.swing.tree.DefaultMutableTreeNode treeNode1 = new javax.swing.tree.DefaultMutableTreeNode("NESFLIS");
         jt_peli.setModel(new javax.swing.tree.DefaultTreeModel(treeNode1));
+        jt_peli.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jt_peliMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(jt_peli);
 
         jLabel6.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
@@ -238,9 +246,7 @@ public class plataforma extends javax.swing.JFrame {
         jScrollPane2.setViewportView(jTextArea1);
 
         jd_peli.setTitle("Agregar Pelicula");
-        jd_peli.setMaximumSize(new java.awt.Dimension(680, 460));
         jd_peli.setMinimumSize(new java.awt.Dimension(680, 460));
-        jd_peli.setPreferredSize(new java.awt.Dimension(680, 460));
         jd_peli.setResizable(false);
         jd_peli.setSize(new java.awt.Dimension(680, 460));
         jd_peli.getContentPane().setLayout(null);
@@ -412,7 +418,7 @@ public class plataforma extends javax.swing.JFrame {
         jLabel18.setBounds(33, 149, 47, 14);
 
         cb_cateserie.setBackground(new java.awt.Color(51, 51, 51));
-        cb_cateserie.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Suspenso", "Terror", "Acción", "Románticas", "Ciencia Ficción", "Animación", "Fantasía" }));
+        cb_cateserie.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Sitcom", "Drama", "Novelas", "Suspenso y YYY" }));
         jd_serie.getContentPane().add(cb_cateserie);
         cb_cateserie.setBounds(158, 146, 166, 20);
 
@@ -680,6 +686,20 @@ public class plataforma extends javax.swing.JFrame {
 
     private void jMenuItem4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem4ActionPerformed
         // TODO add your handling code here:
+        try {
+            archivo = new File ("./Bitacora");
+            FileWriter fw = new FileWriter(archivo, true);
+            BufferedWriter bw = new BufferedWriter(fw);
+            bw.write(bitacora);
+            bitacora="";
+            bw.flush();
+        } catch (IOException ex) {
+        }
+        try {
+            bw.close();
+            fw.close();
+        } catch (IOException ex) {
+        }
         tf_usuario.setText("");
         pf_pass.setText("");
         jd_menu.setVisible(false);
@@ -730,6 +750,15 @@ public class plataforma extends javax.swing.JFrame {
             bitacora+="Se agrego "+ nombre+" en " + new Date() + "por "+ tf_usuario.getText()+"\n";
             jd_peli.setVisible(false);
             jd_peli.setModal(false);
+            tf_nombrepeli.setText("");
+            sp_tiempopeli.setValue(0);
+            cb_catepeli.setSelectedIndex(0);
+            ta_actorpeli.setText("");
+            tf_director.setText("");
+            tf_compania.setText("");
+            cb_idiomapeli.setSelectedIndex(0);
+            rb_sipeli.setEnabled(true);
+            rb_sipeli1.setEnabled(true);
         } catch (Exception e) {
         }
     }//GEN-LAST:event_jButton3MouseClicked
@@ -768,13 +797,57 @@ public class plataforma extends javax.swing.JFrame {
             as.getSeries().add(new Serie(nombre, tiempo, categoria, actores, temporada, productor, idioma, doblaje, subtitulos));
             as.escribirArchivo();
             bitacora+="Se agrego "+ nombre+" en " + new Date() + "por "+ tf_usuario.getText()+"\n";
-            
+            tf_nombreserie.setText("");
+            sp_tiemposerie.setValue(0);
+            cb_cateserie.setSelectedIndex(0);
+            ta_actorserie.setText("");
+            sp_temporada.setValue(0);
+            tf_productor.setText("");
+            cb_idiomaserie.setSelectedIndex(0);
+            rb_siserie.setEnabled(true);
+            rb_siserie1.setEnabled(true);
         } catch (Exception e) {
         }
     }//GEN-LAST:event_jButton4MouseClicked
 
     private void jButton5MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton5MouseClicked
         // TODO add your handling code here:
+        javax.swing.tree.DefaultMutableTreeNode treeNode1 = new javax.swing.tree.DefaultMutableTreeNode("NESFLIS");
+        jt_peli.setModel(new javax.swing.tree.DefaultTreeModel(treeNode1));
+         DefaultTreeModel modeloARBOL = (DefaultTreeModel) jt_peli.getModel();
+        DefaultMutableTreeNode raiz = (DefaultMutableTreeNode) modeloARBOL.getRoot();
+        ((DefaultMutableTreeNode)raiz).add(new DefaultMutableTreeNode("Pelicula"));
+        ((DefaultMutableTreeNode)raiz.getChildAt(0)).add(new DefaultMutableTreeNode("Suspenso"));
+        ((DefaultMutableTreeNode)raiz.getChildAt(0)).add(new DefaultMutableTreeNode("Terror"));
+        ((DefaultMutableTreeNode)raiz.getChildAt(0)).add(new DefaultMutableTreeNode("Acción"));
+        ((DefaultMutableTreeNode)raiz.getChildAt(0)).add(new DefaultMutableTreeNode("Románticas"));
+        ((DefaultMutableTreeNode)raiz.getChildAt(0)).add(new DefaultMutableTreeNode("Ciencia Ficción"));
+        ((DefaultMutableTreeNode)raiz.getChildAt(0)).add(new DefaultMutableTreeNode("Animación"));
+        ((DefaultMutableTreeNode)raiz.getChildAt(0)).add(new DefaultMutableTreeNode("Fantasía"));
+        ap.CargarArchivo();
+        for (int i = 0; i < ap.getPeliculas().size(); i++) {
+            for (int j = 0; j < raiz.getChildAt(0).getChildCount(); j++) {
+                if (raiz.getChildAt(0).getChildAt(j).toString().equals(ap.getPeliculas().get(i).getCategoria())){
+                    DefaultMutableTreeNode p = new DefaultMutableTreeNode(ap.getPeliculas().get(i));
+                    ((DefaultMutableTreeNode) raiz.getChildAt(0).getChildAt(j)).add(p);
+                }
+            }
+        }
+        ((DefaultMutableTreeNode)raiz).add(new DefaultMutableTreeNode("Serie"));
+        ((DefaultMutableTreeNode)raiz.getChildAt(1)).add(new DefaultMutableTreeNode("Sitcom"));
+        ((DefaultMutableTreeNode)raiz.getChildAt(1)).add(new DefaultMutableTreeNode("Drama"));
+        ((DefaultMutableTreeNode)raiz.getChildAt(1)).add(new DefaultMutableTreeNode("Novelas"));
+        ((DefaultMutableTreeNode)raiz.getChildAt(1)).add(new DefaultMutableTreeNode("Suspenso"));
+        ((DefaultMutableTreeNode)raiz.getChildAt(1)).add(new DefaultMutableTreeNode("YYY"));
+        as.CargarArchivo();
+        for (int i = 0; i < as.getSeries().size(); i++) {
+            for (int j = 0; j < raiz.getChildAt(1).getChildCount(); j++) {
+                if (raiz.getChildAt(1).getChildAt(j).toString().equals(as.getSeries().get(i).getCategoria())){
+                    DefaultMutableTreeNode p = new DefaultMutableTreeNode(as.getSeries().get(i));
+                    ((DefaultMutableTreeNode) raiz.getChildAt(1).getChildAt(j)).add(p);
+                }
+            }
+        }
     }//GEN-LAST:event_jButton5MouseClicked
 
     private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
@@ -793,6 +866,7 @@ public class plataforma extends javax.swing.JFrame {
             FileWriter fw = new FileWriter(archivo, true);
             BufferedWriter bw = new BufferedWriter(fw);
             bw.write(bitacora);
+            bitacora="";
             bw.flush();
         } catch (IOException ex) {
         }
@@ -803,6 +877,42 @@ public class plataforma extends javax.swing.JFrame {
         }
         
     }//GEN-LAST:event_jMenuItem3ActionPerformed
+
+    private void jt_peliMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jt_peliMouseClicked
+        // TODO add your handling code here:
+        int row = jt_peli.getClosestRowForLocation(evt.getX(), evt.getY());
+        jt_peli.setSelectionRow(row);
+        Object v1 = jt_peli.getSelectionPath().getLastPathComponent();
+        nodo_seleccionado = (DefaultMutableTreeNode) v1;
+        if (nodo_seleccionado.getUserObject() instanceof Pelicula){
+            ta_datos.setText("");
+            p_selec = (Pelicula) nodo_seleccionado.getUserObject();
+            String temp = "Nombre= "+p_selec.getNombre()+"\n"+
+                    "Duracion= "+p_selec.getTiempo()+"min \n"+
+                    "Categoria= "+p_selec.getCategoria()+"\n"+
+                    "Actores= "+p_selec.getActores()+"\n"+
+                    "Director= "+p_selec.getDirector()+"\n"+
+                    "Compania= "+p_selec.getCompania()+"\n"+
+                    "Idioma= "+p_selec.getIdioma()+"\n"+
+                    "Doblaje= "+p_selec.getDoblaje()+"\n"+
+                    "Subtitulado a espanol= "+p_selec.getSubtitulos();
+            ta_datos.setText(temp);
+        }
+        if (nodo_seleccionado.getUserObject() instanceof Serie){
+            ta_datos.setText("");
+            s_selec = (Serie) nodo_seleccionado.getUserObject();
+            String temp = "Nombre= "+s_selec.getNombre()+"\n"+
+                    "Duracion= "+s_selec.getTiempo()+"min \n"+
+                    "Categoria= "+s_selec.getCategoria()+"\n"+
+                    "Actores= "+s_selec.getActores()+"\n"+
+                    "Numero de Temporadas= "+s_selec.getTemporadas()+"\n"+
+                    "Productora= "+s_selec.getProductor()+"\n"+
+                    "Idioma= "+s_selec.getIdioma()+"\n"+
+                    "Doblaje= "+s_selec.getDoblaje()+"\n"+
+                    "Subtitulado a espanol= "+s_selec.getSubtitulos();
+            ta_datos.setText(temp);
+        }
+    }//GEN-LAST:event_jt_peliMouseClicked
 
     /**
      * @param args the command line arguments
@@ -917,6 +1027,8 @@ public class plataforma extends javax.swing.JFrame {
     private javax.swing.JTextField tf_productor;
     private javax.swing.JTextField tf_usuario;
     // End of variables declaration//GEN-END:variables
-
+DefaultMutableTreeNode nodo_seleccionado;
+Pelicula p_selec;
+Serie s_selec;
 String bitacora="";
 }
