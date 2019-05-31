@@ -45,6 +45,32 @@ public class plataforma extends javax.swing.JFrame {
         jMenuItem4 = new javax.swing.JMenuItem();
         jScrollPane2 = new javax.swing.JScrollPane();
         jTextArea1 = new javax.swing.JTextArea();
+        jd_peli = new javax.swing.JDialog();
+        tf_nombrepeli = new javax.swing.JTextField();
+        jLabel7 = new javax.swing.JLabel();
+        jLabel8 = new javax.swing.JLabel();
+        sp_tiempopeli = new javax.swing.JSpinner();
+        jLabel9 = new javax.swing.JLabel();
+        cb_catepeli = new javax.swing.JComboBox<>();
+        jLabel10 = new javax.swing.JLabel();
+        jScrollPane4 = new javax.swing.JScrollPane();
+        ta_actorpeli = new javax.swing.JTextArea();
+        jLabel11 = new javax.swing.JLabel();
+        tf_director = new javax.swing.JTextField();
+        jLabel12 = new javax.swing.JLabel();
+        tf_compania = new javax.swing.JTextField();
+        jLabel13 = new javax.swing.JLabel();
+        cb_idiomapeli = new javax.swing.JComboBox<>();
+        jLabel14 = new javax.swing.JLabel();
+        rb_sipeli = new javax.swing.JRadioButton();
+        rb_nopeli = new javax.swing.JRadioButton();
+        jLabel15 = new javax.swing.JLabel();
+        rb_sipeli1 = new javax.swing.JRadioButton();
+        rb_nopeli1 = new javax.swing.JRadioButton();
+        jPanel3 = new javax.swing.JPanel();
+        jButton3 = new javax.swing.JButton();
+        buttonGroup1 = new javax.swing.ButtonGroup();
+        buttonGroup2 = new javax.swing.ButtonGroup();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
@@ -116,8 +142,18 @@ public class plataforma extends javax.swing.JFrame {
         jMenuBar1.setForeground(new java.awt.Color(102, 102, 102));
 
         jMenu1.setText("Opciones");
+        jMenu1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenu1ActionPerformed(evt);
+            }
+        });
 
         jMenuItem1.setText("Agregar Pelicula");
+        jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem1ActionPerformed(evt);
+            }
+        });
         jMenu1.add(jMenuItem1);
 
         jMenuItem2.setText("Agregar Serie");
@@ -127,6 +163,11 @@ public class plataforma extends javax.swing.JFrame {
         jMenu1.add(jMenuItem3);
 
         jMenuItem4.setText("Log Out");
+        jMenuItem4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem4ActionPerformed(evt);
+            }
+        });
         jMenu1.add(jMenuItem4);
 
         jMenuBar1.add(jMenu1);
@@ -136,6 +177,155 @@ public class plataforma extends javax.swing.JFrame {
         jTextArea1.setColumns(20);
         jTextArea1.setRows(5);
         jScrollPane2.setViewportView(jTextArea1);
+
+        jd_peli.setTitle("Agregar Pelicula");
+        jd_peli.setLocationByPlatform(true);
+        jd_peli.setMaximumSize(new java.awt.Dimension(680, 460));
+        jd_peli.setMinimumSize(new java.awt.Dimension(680, 460));
+        jd_peli.setPreferredSize(new java.awt.Dimension(680, 460));
+        jd_peli.setResizable(false);
+        jd_peli.setSize(new java.awt.Dimension(680, 460));
+        jd_peli.getContentPane().setLayout(null);
+
+        tf_nombrepeli.setBackground(new java.awt.Color(51, 51, 51));
+        tf_nombrepeli.setForeground(new java.awt.Color(255, 255, 255));
+        jd_peli.getContentPane().add(tf_nombrepeli);
+        tf_nombrepeli.setBounds(158, 69, 166, 20);
+
+        jLabel7.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel7.setText("Nombre");
+        jd_peli.getContentPane().add(jLabel7);
+        jLabel7.setBounds(33, 72, 37, 14);
+
+        jLabel8.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel8.setText("Duracion (Minutos)");
+        jd_peli.getContentPane().add(jLabel8);
+        jLabel8.setBounds(33, 110, 90, 14);
+        jd_peli.getContentPane().add(sp_tiempopeli);
+        sp_tiempopeli.setBounds(265, 107, 59, 20);
+
+        jLabel9.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel9.setText("Categoria");
+        jd_peli.getContentPane().add(jLabel9);
+        jLabel9.setBounds(33, 149, 47, 14);
+
+        cb_catepeli.setBackground(new java.awt.Color(51, 51, 51));
+        cb_catepeli.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Suspenso", "Terror", "Acción", "Románticas", "Ciencia Ficción", "Animación", "Fantasía" }));
+        jd_peli.getContentPane().add(cb_catepeli);
+        cb_catepeli.setBounds(158, 146, 166, 20);
+
+        jLabel10.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel10.setText("Actores");
+        jd_peli.getContentPane().add(jLabel10);
+        jLabel10.setBounds(33, 183, 37, 14);
+
+        ta_actorpeli.setBackground(new java.awt.Color(51, 51, 51));
+        ta_actorpeli.setColumns(20);
+        ta_actorpeli.setForeground(new java.awt.Color(255, 255, 255));
+        ta_actorpeli.setRows(5);
+        jScrollPane4.setViewportView(ta_actorpeli);
+
+        jd_peli.getContentPane().add(jScrollPane4);
+        jScrollPane4.setBounds(158, 183, 166, 96);
+
+        jLabel11.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel11.setText("Director");
+        jd_peli.getContentPane().add(jLabel11);
+        jLabel11.setBounds(33, 310, 38, 14);
+
+        tf_director.setBackground(new java.awt.Color(51, 51, 51));
+        tf_director.setForeground(new java.awt.Color(255, 255, 255));
+        jd_peli.getContentPane().add(tf_director);
+        tf_director.setBounds(158, 307, 166, 20);
+
+        jLabel12.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel12.setText("Compania");
+        jd_peli.getContentPane().add(jLabel12);
+        jLabel12.setBounds(363, 72, 47, 14);
+
+        tf_compania.setBackground(new java.awt.Color(51, 51, 51));
+        tf_compania.setForeground(new java.awt.Color(255, 255, 255));
+        jd_peli.getContentPane().add(tf_compania);
+        tf_compania.setBounds(467, 69, 166, 20);
+
+        jLabel13.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel13.setText("Idioma");
+        jd_peli.getContentPane().add(jLabel13);
+        jLabel13.setBounds(363, 110, 32, 14);
+
+        cb_idiomapeli.setBackground(new java.awt.Color(51, 51, 51));
+        cb_idiomapeli.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Español", "Ingles", "Alemán y Francés" }));
+        jd_peli.getContentPane().add(cb_idiomapeli);
+        cb_idiomapeli.setBounds(467, 107, 166, 20);
+
+        jLabel14.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel14.setText("Doblaje");
+        jd_peli.getContentPane().add(jLabel14);
+        jLabel14.setBounds(363, 149, 36, 14);
+
+        rb_sipeli.setBackground(new java.awt.Color(0, 0, 0));
+        buttonGroup1.add(rb_sipeli);
+        rb_sipeli.setForeground(new java.awt.Color(255, 255, 255));
+        rb_sipeli.setText("Si");
+        jd_peli.getContentPane().add(rb_sipeli);
+        rb_sipeli.setBounds(509, 145, 33, 23);
+
+        rb_nopeli.setBackground(new java.awt.Color(0, 0, 0));
+        buttonGroup1.add(rb_nopeli);
+        rb_nopeli.setForeground(new java.awt.Color(255, 255, 255));
+        rb_nopeli.setText("No");
+        jd_peli.getContentPane().add(rb_nopeli);
+        rb_nopeli.setBounds(572, 145, 39, 23);
+
+        jLabel15.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel15.setText("Subtitulos");
+        jd_peli.getContentPane().add(jLabel15);
+        jLabel15.setBounds(363, 187, 47, 14);
+
+        rb_sipeli1.setBackground(new java.awt.Color(0, 0, 0));
+        buttonGroup2.add(rb_sipeli1);
+        rb_sipeli1.setForeground(new java.awt.Color(255, 255, 255));
+        rb_sipeli1.setText("Si");
+        jd_peli.getContentPane().add(rb_sipeli1);
+        rb_sipeli1.setBounds(509, 183, 33, 23);
+
+        rb_nopeli1.setBackground(new java.awt.Color(0, 0, 0));
+        buttonGroup2.add(rb_nopeli1);
+        rb_nopeli1.setForeground(new java.awt.Color(255, 255, 255));
+        rb_nopeli1.setText("No");
+        jd_peli.getContentPane().add(rb_nopeli1);
+        rb_nopeli1.setBounds(572, 183, 39, 23);
+
+        jPanel3.setBackground(new java.awt.Color(0, 0, 0));
+
+        jButton3.setBackground(new java.awt.Color(255, 255, 255));
+        jButton3.setForeground(new java.awt.Color(204, 0, 0));
+        jButton3.setText("Guardar");
+        jButton3.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jButton3MouseClicked(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
+        jPanel3.setLayout(jPanel3Layout);
+        jPanel3Layout.setHorizontalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addGap(200, 200, 200)
+                .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 318, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(202, Short.MAX_VALUE))
+        );
+        jPanel3Layout.setVerticalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
+                .addContainerGap(393, Short.MAX_VALUE)
+                .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(60, 60, 60))
+        );
+
+        jd_peli.getContentPane().add(jPanel3);
+        jPanel3.setBounds(-20, -10, 720, 490);
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(0, 0, 0));
@@ -257,6 +447,8 @@ public class plataforma extends javax.swing.JFrame {
             }
         }
         if (val){
+            tf_usuario.setText("");
+            pf_pass.setText("");
             jd_menu.setModal(true);
             jd_menu.pack();
             jd_menu.setLocationRelativeTo(this);
@@ -277,6 +469,60 @@ public class plataforma extends javax.swing.JFrame {
         }
         JOptionPane.showMessageDialog(this, temp);
     }//GEN-LAST:event_jButton2MouseClicked
+
+    private void jMenu1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenu1ActionPerformed
+
+    }//GEN-LAST:event_jMenu1ActionPerformed
+
+    private void jMenuItem4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem4ActionPerformed
+        // TODO add your handling code here:
+        jd_menu.setVisible(false);
+        jd_menu.setModal(false);
+    }//GEN-LAST:event_jMenuItem4ActionPerformed
+
+    private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
+        // TODO add your handling code here:
+        jd_peli.setModal(true);
+        jd_peli.pack();
+        jd_peli.setLocationRelativeTo(this);
+        jd_peli.setVisible(true);
+    }//GEN-LAST:event_jMenuItem1ActionPerformed
+
+    private void jButton3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton3MouseClicked
+        // TODO add your handling code here:
+        String nombre;
+        int tiempo;
+        String categoria;
+        String actores;
+        String director;
+        String compania;
+        String idioma;
+        String doblaje="";
+        String subtitulos="";
+        try {
+            nombre= tf_nombrepeli.getText();
+            tiempo= (Integer)sp_tiempopeli.getValue();
+            categoria = cb_catepeli.getSelectedItem().toString();
+            actores = ta_actorpeli.getText();
+            director = tf_director.getText();
+            compania = tf_compania.getText();
+            idioma = cb_idiomapeli.getSelectedItem().toString();
+            if (rb_sipeli.isSelected()){
+                doblaje = "si";
+            }
+            else{
+                doblaje = "no";
+            }
+            if (rb_sipeli1.isSelected()) {
+                subtitulos="si";
+            } else {
+                subtitulos="no";
+            }
+            
+            
+        } catch (Exception e) {
+        }
+    }//GEN-LAST:event_jButton3MouseClicked
 
     /**
      * @param args the command line arguments
@@ -314,14 +560,28 @@ public class plataforma extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.ButtonGroup buttonGroup1;
+    private javax.swing.ButtonGroup buttonGroup2;
+    private javax.swing.JComboBox<String> cb_catepeli;
+    private javax.swing.JComboBox<String> cb_idiomapeli;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
+    private javax.swing.JButton jButton3;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel11;
+    private javax.swing.JLabel jLabel12;
+    private javax.swing.JLabel jLabel13;
+    private javax.swing.JLabel jLabel14;
+    private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem1;
@@ -330,14 +590,26 @@ public class plataforma extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItem4;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
+    private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
+    private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JTextArea jTextArea1;
     private javax.swing.JDialog jd_menu;
+    private javax.swing.JDialog jd_peli;
     private javax.swing.JTree jt_peli;
     private javax.swing.JPasswordField pf_pass;
+    private javax.swing.JRadioButton rb_nopeli;
+    private javax.swing.JRadioButton rb_nopeli1;
+    private javax.swing.JRadioButton rb_sipeli;
+    private javax.swing.JRadioButton rb_sipeli1;
+    private javax.swing.JSpinner sp_tiempopeli;
+    private javax.swing.JTextArea ta_actorpeli;
     private javax.swing.JTextArea ta_datos;
+    private javax.swing.JTextField tf_compania;
+    private javax.swing.JTextField tf_director;
+    private javax.swing.JTextField tf_nombrepeli;
     private javax.swing.JTextField tf_usuario;
     // End of variables declaration//GEN-END:variables
 ArrayList <Usuario> usuarios = new ArrayList();

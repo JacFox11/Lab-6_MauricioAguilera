@@ -5,24 +5,24 @@ package lab.pkg6_mauricioaguilera;
 public class Serie {
     private String nombre;
     private int tiempo;
-    private String categoría;
+    private String categoria;
     private String actores;
     private int temporadas;
     private String productor;
     private String idioma;
     private String doblaje;
-    private String subtítulos;
+    private String subtitulos;
 
     public Serie(String nombre, int tiempo, String categoría, String actores, int temporadas, String productor, String idioma, String doblaje, String subtítulos) {
         this.nombre = nombre;
         this.tiempo = tiempo;
-        this.categoría = categoría;
+        this.categoria = categoría;
         this.actores = actores;
         this.temporadas = temporadas;
         this.productor = productor;
         this.idioma = idioma;
         this.doblaje = doblaje;
-        this.subtítulos = subtítulos;
+        this.subtitulos = subtítulos;
     }
 
     public String getNombre() {
@@ -41,12 +41,12 @@ public class Serie {
         this.tiempo = tiempo;
     }
 
-    public String getCategoría() {
-        return categoría;
+    public String getCategoria() {
+        return categoria;
     }
 
-    public void setCategoría(String categoría) {
-        this.categoría = categoría;
+    public void setCategoria(String categoria) {
+        this.categoria = categoria;
     }
 
     public String getActores() {
@@ -89,12 +89,12 @@ public class Serie {
         this.doblaje = doblaje;
     }
 
-    public String getSubtítulos() {
-        return subtítulos;
+    public String getSubtitulos() {
+        return subtitulos;
     }
 
-    public void setSubtítulos(String subtítulos) {
-        this.subtítulos = subtítulos;
+    public void setSubtitulos(String subtitulos) {
+        this.subtitulos = subtitulos;
     }
 
     @Override

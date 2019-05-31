@@ -5,24 +5,24 @@ package lab.pkg6_mauricioaguilera;
 public class Pelicula {
     private String nombre;
     private int tiempo;
-    private String categoría;
+    private String categoria;
     private String actores;
     private String director;
-    private String compañía;
+    private String compania;
     private String idioma;
     private String doblaje;
-    private String subtítulos;
+    private String subtitulos;
 
     public Pelicula(String nombre, int tiempo, String categoría, String actores, String director, String compañía, String idioma, String doblaje, String subtítulos) {
         this.nombre = nombre;
         this.tiempo = tiempo;
-        this.categoría = categoría;
+        this.categoria = categoría;
         this.actores = actores;
         this.director = director;
-        this.compañía = compañía;
+        this.compania = compañía;
         this.idioma = idioma;
         this.doblaje = doblaje;
-        this.subtítulos = subtítulos;
+        this.subtitulos = subtítulos;
     }
 
     public String getNombre() {
@@ -41,12 +41,12 @@ public class Pelicula {
         this.tiempo = tiempo;
     }
 
-    public String getCategoría() {
-        return categoría;
+    public String getCategoria() {
+        return categoria;
     }
 
-    public void setCategoría(String categoría) {
-        this.categoría = categoría;
+    public void setCategoria(String categoria) {
+        this.categoria = categoria;
     }
 
     public String getActores() {
@@ -65,12 +65,12 @@ public class Pelicula {
         this.director = director;
     }
 
-    public String getCompañía() {
-        return compañía;
+    public String getCompania() {
+        return compania;
     }
 
-    public void setCompañía(String compañía) {
-        this.compañía = compañía;
+    public void setCompania(String compania) {
+        this.compania = compania;
     }
 
     public String getIdioma() {
@@ -89,12 +89,12 @@ public class Pelicula {
         this.doblaje = doblaje;
     }
 
-    public String getSubtítulos() {
-        return subtítulos;
+    public String getSubtitulos() {
+        return subtitulos;
     }
 
-    public void setSubtítulos(String subtítulos) {
-        this.subtítulos = subtítulos;
+    public void setSubtitulos(String subtitulos) {
+        this.subtitulos = subtitulos;
     }
 
     @Override
