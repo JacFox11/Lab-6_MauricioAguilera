@@ -141,7 +141,9 @@ public class plataforma extends javax.swing.JFrame {
         tf_usuario = new javax.swing.JTextField();
         jButton2 = new javax.swing.JButton();
 
+        jd_menu.setMaximumSize(new java.awt.Dimension(680, 460));
         jd_menu.setMinimumSize(new java.awt.Dimension(680, 460));
+        jd_menu.setPreferredSize(new java.awt.Dimension(680, 460));
         jd_menu.setResizable(false);
         jd_menu.setSize(new java.awt.Dimension(680, 460));
         jd_menu.getContentPane().setLayout(null);
@@ -774,7 +776,7 @@ public class plataforma extends javax.swing.JFrame {
     private void jMenuItem4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem4ActionPerformed
         // TODO add your handling code here:
         try {
-            archivo = new File ("./Bitacora");
+            archivo = new File ("./Bitacora.txt");
             FileWriter fw = new FileWriter(archivo, true);
             BufferedWriter bw = new BufferedWriter(fw);
             bw.write(bitacora);
